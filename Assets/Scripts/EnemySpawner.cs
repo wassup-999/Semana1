@@ -65,6 +65,9 @@ public class EnemySpawner : MonoBehaviour
     }
     public void SpawnLimit()
     {
+        for (int i = 0; i<=10; i += 2)
+        {
 
+        }
     }
 }
