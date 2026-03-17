@@ -15,15 +15,9 @@ public class EnemyBase : MonoBehaviour
 
     
     void Update()
-    {
-        
+    {       
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, Range);
-        Gizmos.DrawLine(transform.position,Player.transform.position);
-    }
+   
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
@@ -42,5 +36,14 @@ public class EnemyBase : MonoBehaviour
             print("not Detected");
         }
     }
-    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, Range);
+        Gizmos.color = Color.green;
+        if (VerifyArea)
+        {
+            Gizmos.DrawLine(transform.position, Player.transform.position);
+        }       
+    }
 }
