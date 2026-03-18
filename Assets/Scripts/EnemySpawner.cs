@@ -8,6 +8,12 @@ public class EnemySpawner : MonoBehaviour
     public float SpawnInterval = 2f;
     public bool EnableSpawn = false;
     public float counter;
+    public int NumEnemy = 0;
+    public int NumMaxEnemy = 5;
+    public void Awake()
+    {
+        
+    }
     void Start()
     {
         GetComponent<SphereCollider>().radius = Range;
@@ -18,13 +24,19 @@ public class EnemySpawner : MonoBehaviour
             if (EnableSpawn)
             {
                 counter += Time.deltaTime;
-            if (counter > SpawnInterval)
+                if (counter > SpawnInterval)
                 {
-                    SpawnEnemy();
+                    SpawnEnemy();                
                     counter = 0f;
                 }
             }
-           
+            for(int i = 0; i<=NumMaxEnemy; i++)
+            {
+                if(NumEnemy >= NumMaxEnemy)
+                {
+                    EnableSpawn = false;
+                }           
+            }
     }
     private void OnDrawGizmos()
     {
@@ -54,20 +66,14 @@ public class EnemySpawner : MonoBehaviour
             counter += Time.deltaTime;
             if (counter > SpawnInterval)
             {
+                NumEnemy++;
                 GameObject obj = Instantiate(EnemyPrefab, transform);
                 obj.transform.position = new(0, 0, 0);
                 Vector3 origin = transform.position;
                 Vector3 dir = new Vector3(Random.Range(1f, -1f), 0, (Random.Range(1f, -1f))).normalized;
                 Vector3 FinalPosition = origin + dir * Random.Range(0, Range);
                 obj.transform.position = FinalPosition;               
-            }
-        }
-    }
-    public void SpawnLimit()
-    {
-        for (int i = 0; i<=10; i += 2)
-        {
-
-        }
-    }
+            }          
+        }      
+    }      
 }

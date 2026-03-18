@@ -5,7 +5,7 @@ public class EnemyBase : MonoBehaviour
     public int Range=10;
     public bool VerifyArea = false;
     public Transform Player;
-    
+    public float speed = 2.5f;
     void Start()
     {       
         GetComponent<SphereCollider>().radius = Range;
@@ -15,8 +15,10 @@ public class EnemyBase : MonoBehaviour
 
     
     void Update()
-    {       
+    {
+        FollowPlayer();
     }
+
    
     private void OnTriggerEnter(Collider other)
     {
@@ -36,6 +38,14 @@ public class EnemyBase : MonoBehaviour
             print("not Detected");
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            print("Enemy Destroyed");
+            Destroy(gameObject);
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -46,4 +56,13 @@ public class EnemyBase : MonoBehaviour
             Gizmos.DrawLine(transform.position, Player.transform.position);
         }       
     }
+    public void FollowPlayer()
+    {
+        if (VerifyArea)
+        {     
+            Vector3 dir = (Player.transform.position - transform.position).normalized;
+            transform.position += dir * speed * Time.deltaTime;          
+        }
+    }
+
 }
