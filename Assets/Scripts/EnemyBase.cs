@@ -5,7 +5,7 @@ public class EnemyBase : MonoBehaviour
     public int Range=10;
     public bool VerifyArea = false;
     public Transform Player;
-    public float speed = 2.5f;
+    public float speed = 1f;
     void Start()
     {       
         GetComponent<SphereCollider>().radius = Range;

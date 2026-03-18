@@ -129,7 +129,7 @@ MonoBehaviour:
   Range: 5
   VerifyArea: 0
   Player: {fileID: 0}
-  speed: 5
+  speed: 1
 --- !u!135 &-8693188119471115712
 SphereCollider:
   m_ObjectHideFlags: 0
