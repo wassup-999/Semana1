@@ -42,6 +42,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
             print("Enemy Destroyed");
             Destroy(gameObject);
         }
